@@ -140,9 +140,9 @@ async function doSync(){
 /* ---------- engine ---------- */
 async function eng(){
   if(W)return;
-  W=new Worker('sf/stockfish-19-lite-single.js');
+  W=new Worker('stockfish-19-lite-single.js');
   W.onmessage=e=>{if(evRes)evRes(String(e.data))};
-  W.onerror=()=>setSt('Engine failed to load. Make sure the sf/ folder is deployed next to index.html');
+  W.onerror=()=>setSt('Engine failed to load. Make sure the two stockfish files are uploaded next to index.html');
   await new Promise(r=>{evRes=l=>{if(l.includes('uciok')){evRes=null;r()}};W.postMessage('uci')});
   W.postMessage('setoption name Hash value 64');
 }
